@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react'
-import {Products,Navbar} from '../src/Components';
+import axios from 'axios'
+import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
+import {Products,Navbar,Cart} from '../src/Components';
 import { commerce } from './lib/commerce';
 
 
@@ -13,10 +15,11 @@ const App = () => {
   }
   const fetchCart = async () =>{
     const cart = await commerce.cart.retrieve();
+    console.log(cart);
     setCart(cart);
   }
 
-  const haddleCart = async (productId,quantity) =>{
+  const handleCart = async (productId,quantity) =>{
     const item = await commerce.cart.add(productId,quantity);
     setCart(item.cart);
   }
@@ -25,14 +28,23 @@ const App = () => {
     fetchProducts();
     fetchCart();
   }, [])
- console.log(cart.total_items);
+
 
   
   return (
-    <div>
+    <Router>
+      <div>
       <Navbar cartCount={cart.total_items}/>
-      <Products products={products} addToCart={haddleCart}/>
-    </div>
+       <Switch>
+        <Route exact path="/">
+            <Products products={products} addToCart={handleCart}/>
+        </Route>
+        <Route exact path="/cart">
+            <Cart cart={cart}/>
+        </Route>
+      </Switch>
+      </div>
+    </Router>
   )
 }
 

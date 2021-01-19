@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
-import {Products,Navbar,Cart} from '../src/Components';
+import {Products,Navbar,Cart,Login} from '../src/Components';
 import { commerce } from './lib/commerce';
 
 
@@ -41,6 +41,9 @@ const App = () => {
         </Route>
         <Route exact path="/cart">
             <Cart cart={cart}/>
+        </Route>
+        <Route exact path="/login">
+          <Login />
         </Route>
       </Switch>
       </div>

@@ -1,9 +1,13 @@
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Style.css';
 import sideImage from '../../assets/maxresdefault.jpg';
 import {Form,Button,FormGroup,Label,Input,FormText} from 'reactstrap'
 import { Formik } from "formik";
-const login = () => {
+import {login} from "../../redux/actions/auth";
+import {connect} from "react-redux"
+const Login1 = (props) => {
+    
     const initialValues = {
         email: "",
         password: ""
@@ -24,7 +28,7 @@ const login = () => {
         return errors;
       };
       const submitForm = (values) => {
-        console.log(values);
+        props.login(values);
       };
     return (
         <Formik
@@ -94,4 +98,4 @@ const login = () => {
     )
 }
 
-export default login
+export default connect(null,{login})(Login1)

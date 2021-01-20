@@ -3,6 +3,9 @@ import axios from 'axios'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import {Products,Navbar,Cart,Login} from '../src/Components';
 import { commerce } from './lib/commerce';
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import {history} from './history'; 
 
 
 const App = () => {
@@ -32,18 +35,20 @@ const App = () => {
 
   
   return (
-    <Router>
+    <Router history={history}>
       <div>
+      <ReactNotification />
       <Navbar cartCount={cart.total_items}/>
        <Switch>
-        <Route exact path="/">
-            <Products products={products} addToCart={handleCart}/>
-        </Route>
+        
         <Route exact path="/cart">
             <Cart cart={cart}/>
         </Route>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/">
+            <Products products={products} addToCart={handleCart}/>
         </Route>
       </Switch>
       </div>

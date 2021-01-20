@@ -1,0 +1,22 @@
+
+.marginClass{
+    margin-top: 50px;
+}
+.btn_style{
+    background-color:salmon;
+    color: rgb(255, 253, 108);
+    font-size: 20px;
+    font-weight: bold;
+}
+.formBlock{
+    background-color:slategrey;
+    border: 1px solid none;
+    padding: 10px;
+    box-shadow: 5px 10px #c5c0c0;
+}
+.error{
+    color:red;
+}
+.input-error{
+    border: red solid;
+}

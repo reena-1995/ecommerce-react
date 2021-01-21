@@ -13,7 +13,7 @@ const Register = () => {
         "password":"",
         "password_confirmation":""
     }
-    const validate = (values) => {
+   // const validate = (values) => {
         // let errors = {};
         // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
         // if (!values.email) {
@@ -36,35 +36,31 @@ const Register = () => {
         //     errors.password_confirmation = "Password and Confirm Password must be same";
         // }
         // return errors;
-        return Yup.object().shape({
-            email: Yup.string()
-              .email('E-mail is not valid!')
-              .required('E-mail is required!'),
-            password: Yup.string()
-              .min(6, 'Password has to be longer than 6 characters!')
-              .required('Password is required!'),
-            passwordConfirmation: Yup.string()
-              .oneOf([values.password], 'Passwords are not the same!')
-              .required('Password confirmation is required!'),
-            consent: Yup.bool()
-              .test(
-                'consent',
-                'You have to agree with our Terms and Conditions!',
-                value => value === true
-              )
-              .required(
-                'You have to agree with our Terms and Conditions!'
-              ),
-          })
-      };
+        
+     // };
     const submitForm =(values)=>{
 
     }
+    function getValidationSchema(values) {
+        return Yup.object(values).shape({
+        email: Yup.string()
+          .email('E-mail is not valid!')
+          .required('E-mail is required!'),
+        password: Yup.string()
+          .min(6, 'Password has to be longer than 6 characters!')  
+          .required('Password is required!'),
+        name: Yup.string()
+          .required('name is required!'),
+        password_confirmation: Yup.string() 
+          .required('Confirm password is required!')
+          .oneOf([values.password], 'Passwords are not the same!'),
+      })}
 
     return (
         <Formik
         initialValues={initialValues}
-        validate={validate}
+        //validate={validate}
+        validationSchema={getValidationSchema} 
         onSubmit={submitForm}
          >
           {(formik) => {
@@ -117,7 +113,7 @@ const Register = () => {
                             <Input type="password" name="password" value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    id="examplePassword" placeholder="Enter your password " 
+                    id="Password" placeholder="Enter your password " 
                              className={errors.password && touched.password ? 
                                     "input-error" : null}/>
                             {errors.password && touched.password && (

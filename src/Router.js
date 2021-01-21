@@ -1,31 +1,21 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import {BrowserRouter as Router,Switch,Route, Redirect} from 'react-router-dom'
-import {Products,Navbar,Cart,Login} from './Components';
+import {Products,Navbar,Cart,Login,Loader,Register} from './Components';
 import { commerce } from './lib/commerce';
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import {history} from './history'; 
 import { useSelector } from 'react-redux';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
-const ConfigRoute = (props)=>{
-  const isAuth=useSelector(state.auth.isAuthenticated)  
-  return (
-      <div>
-        {props.isAuthenticated?<Route {...props}>
-          {props.children}
-        </Route>:<Redirect to="/login"/>}
-      </div>
-    )
-}
-// const mapStateToProps=(state)=>{
-//   return{
-//     isAuthenticated: state.auth.isAuthenticated
-//   }
-// }
-//const AppRoute   = connect(mapStateToProps)(ConfigRoute)
+
+
+
 
 const Router1 = () => {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  const isLoader        = useSelector(state => state.auth.isLoading)
   const [products,setProducts] = useState([]);
   const [cart, setCart]        = useState("");
   
@@ -52,24 +42,38 @@ const Router1 = () => {
 
   
   return (
+   
     <Router history={history}>
-      <div>
-      <ReactNotification />
-      {/* <Navbar cartCount={cart.total_items}/> */}
-       <Switch>
-        
-        <Route exact path="/cart">
-            <Cart cart={cart}/>
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/">
-            <Products products={products} addToCart={handleCart}/>
-        </Route>
-      </Switch>
-      </div>
+      {
+        isLoader ? <Loader/> : 
+        isAuthenticated ?
+          <div>
+          <ReactNotification />
+           <Navbar cartCount={cart.total_items}/> 
+           <Switch>
+            <Route exact path="/">
+                <Products products={products} addToCart={handleCart}/>
+            </Route>
+          </Switch>
+          </div>
+         : 
+         <div>
+          <ReactNotification />
+          <Switch>
+          <Route exact path="/login"> 
+           <Login/>
+          </Route>
+          <Route exact path="/register"> 
+           <Register/>
+          </Route>
+          <Redirect to="/login"/>
+         </Switch>
+         </div>
+         
+      }
+      
     </Router>
+ 
   )
 }
 

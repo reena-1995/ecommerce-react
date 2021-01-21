@@ -6,8 +6,6 @@ export const login=({email,password})=>{
     console.log(email,password);
     return dispatch=>{
         axios.post("http://api-dev.manewayznavigation.com/api/login",{email:email,password:password},{headers:{"Device-Id":"45644564","Device-Type":"android","Is-Debug":"1","Device-Token":"4654564","Environment":"SANDBOX","Device-Name":"Note 6","App-Version":"1"}}).then(response=>{
-          
-            dispatch({type:"LOGIN_SUCCESS",payload :response.data})
             store.addNotification({
                 title: "Manewaz!",
                 message: response.data.message,
@@ -21,6 +19,7 @@ export const login=({email,password})=>{
                   onScreen: true
                 }
               });
+              dispatch({type:"LOGIN_SUCCESS",payload :response.data})
               history.push('/');
            
         }).catch(e=>{

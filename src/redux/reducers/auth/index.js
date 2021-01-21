@@ -10,15 +10,19 @@ const login =(state=initialState,action)=>{
             return{
                 ...state,
                 isAuthenticated:true,
+                isLoading:false,
                 user:{
                     email:action.payload.email,
                     token:action.payload.token
                 }
             }
-            
+        case "LOADER" : return{
+            ...state,
+            isLoading:action.payload
+        }   
     
         default:
-            return state;
+            return {...state,isLoading:false};
     }
 }
 export default login

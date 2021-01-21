@@ -6,8 +6,13 @@ import {Form,Button,FormGroup,Label,Input,FormText} from 'reactstrap'
 import { Formik } from "formik";
 import {login} from "../../redux/actions/auth";
 import {connect,useDispatch} from "react-redux"
+import { Link } from 'react-router-dom';
 const Login1 = (props) => {
     const dispatch = useDispatch();
+    
+    const changeLoaderStatus = () =>{
+      
+    }
     const initialValues = {
         email: "",
         password: ""
@@ -28,8 +33,8 @@ const Login1 = (props) => {
         return errors;
       };
       const submitForm = (values) => {
+        dispatch({type:"LOADER",payload:true})
         dispatch(login(values))
-        //props.login(values);
       };
     return (
         <Formik
@@ -59,9 +64,9 @@ const Login1 = (props) => {
                   </div>
                   <div className="col-sm-6 p-5">
                       <div>
-                         <h2>Sign Up</h2>
+                         <h2>Sign In</h2>
                       </div>
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit} autocomplete="off">
                         <FormGroup>
                             <Label for="exampleEmail">Email</Label>
                             <Input type="email" name="email" id="exampleEmail" value={values.email}
@@ -85,8 +90,13 @@ const Login1 = (props) => {
                             )}
                         </FormGroup>
                         <Button className="btn_style">Submit</Button>
+                        <div className="LinkDecor">
+                        Don't have account?<Link to="/register"> Sign Up</Link>
+                        </div>
+                        
                     </Form>
                   </div>
+                 
               </div>
             </div>
            </div>

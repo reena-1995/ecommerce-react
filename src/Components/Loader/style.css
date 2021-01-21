@@ -1,0 +1,8 @@
+.loaderChild{
+   margin: 0 auto;
+}
+.loaderParent{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}

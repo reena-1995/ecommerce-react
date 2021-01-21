@@ -6,9 +6,11 @@ import { commerce } from './lib/commerce';
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import {history} from './history'; 
+import { useSelector } from 'react-redux';
 
 const ConfigRoute = (props)=>{
-    return (
+  const isAuth=useSelector(state.auth.isAuthenticated)  
+  return (
       <div>
         {props.isAuthenticated?<Route {...props}>
           {props.children}

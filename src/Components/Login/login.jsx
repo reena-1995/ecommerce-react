@@ -5,9 +5,9 @@ import sideImage from '../../assets/maxresdefault.jpg';
 import {Form,Button,FormGroup,Label,Input,FormText} from 'reactstrap'
 import { Formik } from "formik";
 import {login} from "../../redux/actions/auth";
-import {connect} from "react-redux"
+import {connect,useDispatch} from "react-redux"
 const Login1 = (props) => {
-    
+    const dispatch = useDispatch();
     const initialValues = {
         email: "",
         password: ""
@@ -28,7 +28,8 @@ const Login1 = (props) => {
         return errors;
       };
       const submitForm = (values) => {
-        props.login(values);
+        dispatch(login(values))
+        //props.login(values);
       };
     return (
         <Formik
@@ -97,5 +98,5 @@ const Login1 = (props) => {
         
     )
 }
+export default Login1;
 
-export default connect(null,{login})(Login1)

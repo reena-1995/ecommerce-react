@@ -1,10 +1,10 @@
 import React from 'react';
-import {AppBar,Toolbar,IconButton,Badge,MenuIteam,Typography,Menu} from '@material-ui/core';
+import {AppBar,Toolbar,IconButton,Badge,MenuIteam,Typography,Menu,Link} from '@material-ui/core';
 import {ShoppingCart} from '@material-ui/icons';
 import logo from '../../assets/maxresdefault.jpg'
 import useStyles from './Style'
 
-const Navbar = ({cartCount}) => {
+const Navbar = ({cartCount,loginButton}) => {
     const classes = useStyles();
     return (
         <>
@@ -15,10 +15,15 @@ const Navbar = ({cartCount}) => {
                       Dom Reactions
                    </Typography>
                    <div className={classes.grow} />
+                   <div className={classes.button}>
+                        <IconButton aria-label="login" color="inherit" href="/login">
+                          Login
+                        </IconButton>
+                    </div>
                     <div className={classes.button}>
                         <IconButton aria-label="Show cart" color="inherit">
                             <Badge badgeContent={cartCount} color="secondary">
-                                <ShoppingCart/>
+                               <ShoppingCart onClick={ () => loginButton(9568472326,"test","iphone")}/>
                             </Badge>
                         </IconButton>
                     </div>

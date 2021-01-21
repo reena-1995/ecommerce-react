@@ -24,11 +24,18 @@ export const login=({email,password})=>{
               history.push('/');
            
         }).catch(e=>{
+          if (e.response) {
+             console.log(e.response.data);
+             console.log(e.response.status);
+             console.log(e.response.headers);
+          }
+
+          
             dispatch({type:"LOGIN_FAIL",payload:e})
              
             store.addNotification({
                 title: "Manewaz!",
-                message: e.message,
+                message: e.response.data.message,
                 type: "danger",
                 insert: "top",
                 container: "top-right",
@@ -39,9 +46,9 @@ export const login=({email,password})=>{
                   onScreen: true
                 }
               });
-              history.push('/');
             
         })
+       
         // try{
         //     const result= axios.post("http://api-dev.manewayznavigation.com/api/login",{email:email,password:password},{headers:{"Device-Id":"45644564","Device-Type":"android","Is-Debug":"1","Device-Token":"4654564","Environment":"SANDBOX","Device-Name":"Note 6","App-Version":"1"}});
         //     dispatch({type:"LOGIN_SUCCESS",payload :result.data})

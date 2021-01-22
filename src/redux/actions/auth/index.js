@@ -52,13 +52,17 @@ export const login =({email,password})=>{
 
 
 
-export const register = ({name,email,password}) => {
+export const register = ({name,email,password,password_confirmation,vin_number,driving_licence,insurance}) => {
   return (dispatch)=>{
     axios.post("http://api-dev.manewayznavigation.com/api/register",
            {
             name:name,
             email:email,
-            password:password
+            password:password,
+            password_confirmation:password_confirmation,
+            vin_number:vin_number,
+            driving_licence:driving_licence,
+            insurance:insurance
           },{
             headers:
             {

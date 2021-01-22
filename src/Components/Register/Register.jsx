@@ -17,6 +17,7 @@ const Register1 = () => {
         "password_confirmation":""
     }
     const submitForm =(values)=>{
+     
       dispatch({type:"LOADER",payload:true})
       dispatch(register(values))
     }
@@ -42,15 +43,7 @@ const Register1 = () => {
         .label('Confirm password')
         .test('passwords-match', 'Passwords must match', function(value) {
           return this.parent.password === value;
-        }),
-      agreeToTerms: yup
-        .boolean()
-        .label('Terms')
-        .test(
-          'is-true',
-          'Must agree to terms to continue',
-          value => value === true
-        ),
+        })
     });
 
     return (

@@ -1,6 +1,13 @@
 const initialState={user:{
     email:"",
-    token:""
+    token:"",
+    insurance:"",
+    password:"",
+    password_confirmation:"",
+    vin_number:"",
+    driving_licence:"",
+    insurance:"",
+
 },
 isAuthenticated:false,
 isLoading:false} 

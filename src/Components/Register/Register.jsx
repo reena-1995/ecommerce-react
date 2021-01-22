@@ -4,63 +4,59 @@ import './style.css'
 import sideImage from '../../assets/maxresdefault.jpg';
 import {Form,Button,FormGroup,Label,Input,FormText} from 'reactstrap'
 import { Formik} from "formik";
+import * as yup from 'yup';
 import { Link } from 'react-router-dom';
-import * as Yup from "yup";
-const Register = () => {
+import {useDispatch} from 'react-redux'
+import {register} from '../../redux/actions/auth/'
+const Register1 = () => {
+    const dispatch = useDispatch();
     const initialValues= {
         "name":"",
         "email":"",
         "password":"",
         "password_confirmation":""
     }
-   // const validate = (values) => {
-        // let errors = {};
-        // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-        // if (!values.email) {
-        //   errors.email = "Email is required";
-        // } else if (!regex.test(values.email)) {
-        //   errors.email = "Invalid Email";
-        // }
-        // if (!values.password) {
-        //   errors.password = "Password is required";
-        // } else if (values.password.length < 4) {
-        //   errors.password = "Password too short";
-        // }
-        // if(!values.name){
-        //     errors.name="Name is required";
-        // }
-
-        // if(!values.password_confirmation){
-        //     errors.password_confirmation="Confirm password is required"
-        // }else if (values.password_confirmation != values.password_confirmation){
-        //     errors.password_confirmation = "Password and Confirm Password must be same";
-        // }
-        // return errors;
-        
-     // };
     const submitForm =(values)=>{
-
+      dispatch({type:"LOADER",payload:true})
+      dispatch(register(values))
     }
-    function getValidationSchema(values) {
-        return Yup.object(values).shape({
-        email: Yup.string()
-          .email('E-mail is not valid!')
-          .required('E-mail is required!'),
-        password: Yup.string()
-          .min(6, 'Password has to be longer than 6 characters!')  
-          .required('Password is required!'),
-        name: Yup.string()
-          .required('name is required!'),
-        password_confirmation: Yup.string() 
-          .required('Confirm password is required!')
-          .oneOf([values.password], 'Passwords are not the same!'),
-      })}
+    const validationSchema = yup.object().shape({
+      name:yup
+      .string()
+      .label('Name')
+      .required(),
+      email: yup
+        .string()
+        .label('Email')
+        .email()
+        .required(),
+      password: yup
+        .string()
+        .label('Password')
+        .required()
+        .min(2, 'Seems a bit short...')
+        .max(10, 'We prefer insecure system, try a shorter password.'),
+        password_confirmation: yup
+        .string()
+        .required()
+        .label('Confirm password')
+        .test('passwords-match', 'Passwords must match', function(value) {
+          return this.parent.password === value;
+        }),
+      agreeToTerms: yup
+        .boolean()
+        .label('Terms')
+        .test(
+          'is-true',
+          'Must agree to terms to continue',
+          value => value === true
+        ),
+    });
 
     return (
         <Formik
         initialValues={initialValues}
-        //validate={validate}
-        validationSchema={getValidationSchema} 
+        validationSchema={validationSchema} 
         onSubmit={submitForm}
          >
           {(formik) => {
@@ -132,7 +128,7 @@ const Register = () => {
                                 <span className="error">{errors.password_confirmation}</span>
                             )}
                         </FormGroup>
-                        <Button className="btn_style">Submit</Button>
+                        <Button className="btn_style" type="submit">Register</Button>
                         <div className="LinkDecor">
                         Already have account?<Link to="/login"> Sign in</Link>
                         </div>
@@ -153,4 +149,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Register1

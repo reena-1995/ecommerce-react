@@ -16,10 +16,15 @@ const login =(state=initialState,action)=>{
                     token:action.payload.token
                 }
             }
-        case "LOADER" : return{
+        case "LOADER" : 
+        return{
             ...state,
             isLoading:action.payload
-        }   
+        }  
+        case "REGISTER_SUCCESS" :
+            return {
+                ...state,
+            }
     
         default:
             return {...state,isLoading:false};

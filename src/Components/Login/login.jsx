@@ -89,7 +89,7 @@ const Login1 = (props) => {
                                 <span className="error">{errors.password}</span>
                             )}
                         </FormGroup>
-                        <Button className="btn_style">Submit</Button>
+                        <Button className="btn_style">Login</Button>
                         <div className="LinkDecor">
                         Don't have account?<Link to="/register"> Sign Up</Link>
                         </div>

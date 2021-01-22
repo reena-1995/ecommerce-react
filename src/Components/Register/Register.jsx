@@ -14,7 +14,10 @@ const Register1 = () => {
         "name":"",
         "email":"",
         "password":"",
-        "password_confirmation":""
+        "password_confirmation":"",
+        "vin_number":"",
+        "driving_licence":"",
+        "insurance":"",
     }
     const submitForm =(values)=>{
      

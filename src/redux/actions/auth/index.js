@@ -86,10 +86,11 @@ export const register = ({name,email,password,password_confirmation,vin_number,d
             dispatch({type:"REGISTER_SUCCESS",payload:response.data})
             history.push('/')
           }).catch(error=>{
+            dispatch({type:"REGISTER_FAIL"})
             store.addNotification({
               title: "Manewaz!",
               message: error.response.data.message,
-              type: "error",
+              type: "danger",
               insert: "top",
               container: "top-right",
               animationIn: ["animate__animated", "animate__fadeIn"],

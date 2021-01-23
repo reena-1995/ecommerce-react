@@ -10,7 +10,7 @@ const initialState={user:{
 
 },
 isAuthenticated:false,
-isLoading:false} 
+isLoading:true} 
 const login =(state=initialState,action)=>{
     switch (action.type) {
         case "LOGIN_SUCCESS":
@@ -19,8 +19,8 @@ const login =(state=initialState,action)=>{
                 isAuthenticated:true,
                 isLoading:false,
                 user:{
-                    email:action.payload.email,
-                    token:action.payload.token
+                    email:action.payload.data.userDetail.email,
+                    token:action.payload.data.userDetail.access_token
                 }
             }
         case "LOADER" : 
@@ -31,6 +31,16 @@ const login =(state=initialState,action)=>{
         case "REGISTER_SUCCESS" :
             return {
                 ...state,
+            }
+        case "VALIDATE_SUCCESS":
+            return {
+                ...state,
+                isAuthenticated:true,
+                user:{
+                    email:action.payload.data.userDetail.email,
+                    token:action.payload.data.userDetail.access_token
+                },
+                isLoading:false,
             }
     
         default:

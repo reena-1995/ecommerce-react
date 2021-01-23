@@ -10,10 +10,10 @@ import { Link } from 'react-router-dom';
 const Login1 = (props) => {
     const dispatch = useDispatch();
     
-    const changeLoaderStatus = () =>{
-      
-    }
-    const initialValues = {
+      const changeLoaderStatus = () =>{
+        
+      }
+      const initialValues = {
         email: "",
         password: ""
       };
@@ -66,7 +66,7 @@ const Login1 = (props) => {
                       <div>
                          <h2>Sign In</h2>
                       </div>
-                    <Form onSubmit={handleSubmit} autocomplete="off">
+                    <Form onSubmit={handleSubmit} autoComplete="off">
                         <FormGroup>
                             <Label for="exampleEmail">Email</Label>
                             <Input type="email" name="email" id="exampleEmail" value={values.email}

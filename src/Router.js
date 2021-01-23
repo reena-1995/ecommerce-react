@@ -6,8 +6,9 @@ import { commerce } from './lib/commerce';
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import {history} from './history'; 
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import {valdate_token} from "../src/redux/actions/auth/index";
 
 
 
@@ -16,6 +17,9 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 const Router1 = () => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   const isLoader        = useSelector(state => state.auth.isLoading)
+  const isToken         = useSelector(state => state.auth.user.token)
+  const dispatch        = useDispatch();
+  const auth_token      = localStorage.getItem('auth_key');
   const [products,setProducts] = useState([]);
   const [cart, setCart]        = useState("");
   
@@ -35,6 +39,9 @@ const Router1 = () => {
   }
  
   useEffect(() => {
+    if(auth_token){
+      dispatch(valdate_token(auth_token))
+    }
     fetchProducts();
     fetchCart();
   }, [])

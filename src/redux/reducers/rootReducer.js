@@ -1,3 +1,4 @@
 import {combineReducers} from 'redux'
 import auth from './auth/index';
-export const rootReducers =combineReducers({auth});
+import horseReducer from './auth/horseReducer'
+export const rootReducers =combineReducers({auth,horseReducer});

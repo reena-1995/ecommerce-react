@@ -1,4 +1,4 @@
-import React from "react";
+import {useEffect,React} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Style.css';
 import sideImage from '../../assets/maxresdefault.jpg';
@@ -8,7 +8,7 @@ import {login} from "../../redux/actions/auth";
 import {connect,useDispatch} from "react-redux"
 import { Link } from 'react-router-dom';
 const Login1 = (props) => {
-    const dispatch = useDispatch();
+      const dispatch = useDispatch();
     
       const changeLoaderStatus = () =>{
         
@@ -36,6 +36,7 @@ const Login1 = (props) => {
         dispatch({type:"LOADER",payload:true})
         dispatch(login(values))
       };
+     
     return (
         <Formik
         initialValues={initialValues}

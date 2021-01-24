@@ -10,7 +10,7 @@ const initialState={user:{
 
 },
 isAuthenticated:false,
-isLoading:true} 
+isLoading:false} 
 const login =(state=initialState,action)=>{
     switch (action.type) {
         case "LOGIN_SUCCESS":
@@ -44,7 +44,7 @@ const login =(state=initialState,action)=>{
             }
     
         default:
-            return {...state,isLoading:false};
+            return {...state};
     }
 }
 export default login

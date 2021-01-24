@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import {BrowserRouter as Router,Switch,Route, Redirect} from 'react-router-dom'
-import {Products,Navbar,Cart,Login,Loader,Register} from './Components';
+import {Products,Navbar,Cart,Login,Loader,Register,Sidebar} from './Components';
 import { commerce } from './lib/commerce';
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
@@ -22,7 +22,7 @@ const Router1 = () => {
   const auth_token      = localStorage.getItem('auth_key');
   const [products,setProducts] = useState([]);
   const [cart, setCart]        = useState("");
-  
+  //
   const fetchProducts = async () => {
     const {data}= await commerce.products.list();
     setProducts(data);
@@ -56,10 +56,17 @@ const Router1 = () => {
         isAuthenticated ?
           <div>
           <ReactNotification />
-           <Navbar cartCount={cart.total_items}/> 
+          
+           <Navbar cartCount={cart.total_items}/>
+          
+              <div className="d-flex outSidebarStyle">
+                <Sidebar/>
+              </div>
+              
            <Switch>
-            <Route exact path="/">
-                <Products products={products} addToCart={handleCart}/>
+            <Route exact path="/user-list">
+            </Route>
+            <Route exact path="/horse-list">
             </Route>
           </Switch>
           </div>

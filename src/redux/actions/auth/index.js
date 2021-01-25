@@ -87,7 +87,7 @@ export const register = ({name,email,password,password_confirmation,vin_number,d
             dispatch({type:"REGISTER_SUCCESS",payload:response.data})
             history.push('/')
           }).catch(error=>{
-            dispatch({type:"REGISTER_FAIL",payload:response.data.message})
+            dispatch({type:"REGISTER_FAIL",payload:error.response.data.message})
             store.addNotification({
               title: "Manewaz!",
               message: error.response.data.message,
@@ -107,6 +107,8 @@ export const register = ({name,email,password,password_confirmation,vin_number,d
 
 export const valdate_token = (token) => {
   return (dispatch)=>{
+    
+    dispatch({type:"LOADER",payload:true})
     axios.get("http://api-dev.manewayznavigation.com/api/validate-oath-token",{headers:{"Device-Id":"45644564","Device-Type":"android","Is-Debug":"1","Device-Token":"4654564","Environment":"SANDBOX","Device-Name":"Note 6","App-Version":"1","Authorization":"Bearer "+token}})
   
     .then(response=>{

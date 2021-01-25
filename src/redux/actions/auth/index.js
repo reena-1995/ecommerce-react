@@ -86,7 +86,7 @@ export const register = ({name,email,password,password_confirmation,vin_number,d
             dispatch({type:"REGISTER_SUCCESS",payload:response.data})
             history.push('/')
           }).catch(error=>{
-            dispatch({type:"REGISTER_FAIL"})
+            dispatch({type:"REGISTER_FAIL",payload:response.data.message})
             store.addNotification({
               title: "Manewaz!",
               message: error.response.data.message,

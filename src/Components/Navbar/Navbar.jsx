@@ -17,13 +17,13 @@ const Navbar = ({cartCount,loginButton}) => {
                    <div className={classes.grow} />
                    <div className={classes.button}>
                         <IconButton aria-label="login" color="inherit" href="/login">
-                          Login
+                          Logout
                         </IconButton>
                     </div>
                     <div className={classes.button}>
                         <IconButton aria-label="Show cart" color="inherit">
                             <Badge badgeContent={cartCount} color="secondary">
-                               <ShoppingCart onClick={ () => loginButton(9568472326,"test","iphone")}/>
+                               <ShoppingCart/>
                             </Badge>
                         </IconButton>
                     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import {useEffect,React} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Style.css';
 import sideImage from '../../assets/maxresdefault.jpg';
@@ -8,12 +8,12 @@ import {login} from "../../redux/actions/auth";
 import {connect,useDispatch} from "react-redux"
 import { Link } from 'react-router-dom';
 const Login1 = (props) => {
-    const dispatch = useDispatch();
+      const dispatch = useDispatch();
     
-    const changeLoaderStatus = () =>{
-      
-    }
-    const initialValues = {
+      const changeLoaderStatus = () =>{
+        
+      }
+      const initialValues = {
         email: "",
         password: ""
       };
@@ -36,6 +36,7 @@ const Login1 = (props) => {
         dispatch({type:"LOADER",payload:true})
         dispatch(login(values))
       };
+     
     return (
         <Formik
         initialValues={initialValues}
@@ -66,7 +67,7 @@ const Login1 = (props) => {
                       <div>
                          <h2>Sign In</h2>
                       </div>
-                    <Form onSubmit={handleSubmit} autocomplete="off">
+                    <Form onSubmit={handleSubmit} autoComplete="off">
                         <FormGroup>
                             <Label for="exampleEmail">Email</Label>
                             <Input type="email" name="email" id="exampleEmail" value={values.email}

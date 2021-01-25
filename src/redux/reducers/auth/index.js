@@ -19,8 +19,8 @@ const login =(state=initialState,action)=>{
                 isAuthenticated:true,
                 isLoading:false,
                 user:{
-                    email:action.payload.email,
-                    token:action.payload.token
+                    email:action.payload.data.userDetail.email,
+                    token:action.payload.data.userDetail.access_token
                 }
             }
         case "LOADER" : 
@@ -32,9 +32,19 @@ const login =(state=initialState,action)=>{
             return {
                 ...state,
             }
+        case "VALIDATE_SUCCESS":
+            return {
+                ...state,
+                isAuthenticated:true,
+                user:{
+                    email:action.payload.data.userDetail.email,
+                    token:action.payload.data.userDetail.access_token
+                },
+                isLoading:false,
+            }
     
         default:
-            return {...state,isLoading:false};
+            return {...state};
     }
 }
 export default login

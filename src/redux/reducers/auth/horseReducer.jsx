@@ -1,25 +1,27 @@
 const initialState = {
-    horseDetail:{
-     id:"",
-     slug:"",   
+    horseDetail:[],
+    details:{
+
     },
     isAuthenticated:false,
     isLoading:false
     }
     const horse = (state=initialState,action) =>{
         switch (action.type) {
-            case "HORSE_LIST_SUCESS":
+            case "HORSE_LIST_SUCCESS":
                 return {
                     ...state,
                     isAuthenticated:false,
-                    horseDetail:{
-                        id:action.payload.data.horses.id,
-                        slug:action.payload.data.horses.slug
-                    },
+                    horseDetail:action.payload.data.horses,
                     isLoading:false
                 }
-                
-        
+            case "HORSE_DETAILS_BY_SLUG":
+                return {
+                    ...state,
+                    isAuthenticated:false,
+                    horseDetail:action.payload.data.horseDetails,
+                    isLoading:false
+                }
             default:
                 return {
                     ...state

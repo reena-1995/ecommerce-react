@@ -10,9 +10,6 @@ import { Link } from 'react-router-dom';
 const Login1 = (props) => {
       const dispatch = useDispatch();
     
-      const changeLoaderStatus = () =>{
-        
-      }
       const initialValues = {
         email: "",
         password: ""

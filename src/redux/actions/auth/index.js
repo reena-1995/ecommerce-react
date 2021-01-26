@@ -4,7 +4,7 @@ import { history } from "../../../history";
 //Login work
 export const login =({email,password})=>{
     return (dispatch) =>{
-        axios.post("http://api-dev.manewayznavigation.com/api/login",{email:email,password:password},{headers:{"Device-Id":"45644564","Device-Type":"android","Is-Debug":"1","Device-Token":"4654564","Environment":"SANDBOX","Device-Name":"Note 6","App-Version":"1"}}).then(response=>{
+        axios.post("https://api-dev.manewayznavigation.com/api/login",{email:email,password:password},{headers:{"Device-Id":"45644564","Device-Type":"android","Is-Debug":"1","Device-Token":"4654564","Environment":"SANDBOX","Device-Name":"Note 6","App-Version":"1"}}).then(response=>{
             localStorage.setItem('auth_key', response.data.data.userDetail.access_token);
             store.addNotification({
                 title: "Manewaz!",
@@ -55,7 +55,7 @@ export const login =({email,password})=>{
 
 export const register = ({name,email,password,password_confirmation,vin_number,driving_licence,insurance}) => {
   return (dispatch)=>{
-    axios.post("http://api-dev.manewayznavigation.com/api/register",
+    axios.post("https://api-dev.manewayznavigation.com/api/register",
            {
             name:name,
             email:email,
@@ -109,7 +109,7 @@ export const valdate_token = (token) => {
   return (dispatch)=>{
     
     dispatch({type:"LOADER",payload:true})
-    axios.get("http://api-dev.manewayznavigation.com/api/validate-oath-token",{headers:{"Device-Id":"45644564","Device-Type":"android","Is-Debug":"1","Device-Token":"4654564","Environment":"SANDBOX","Device-Name":"Note 6","App-Version":"1","Authorization":"Bearer "+token}})
+    axios.get("https://api-dev.manewayznavigation.com/api/validate-oath-token",{headers:{"Device-Id":"45644564","Device-Type":"android","Is-Debug":"1","Device-Token":"4654564","Environment":"SANDBOX","Device-Name":"Note 6","App-Version":"1","Authorization":"Bearer "+token}})
   
     .then(response=>{
       store.addNotification({
@@ -130,7 +130,7 @@ export const valdate_token = (token) => {
     }).catch(error=>{
       store.addNotification({
         title: "Manewaz!",
-        message: error.response.data.message,
+        message: error.response,
         type: "danger",
         insert: "top",
         container: "top-right",

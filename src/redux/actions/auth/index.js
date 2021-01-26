@@ -87,6 +87,7 @@ export const register = ({name,email,password,password_confirmation,vin_number,d
             dispatch({type:"REGISTER_SUCCESS",payload:response.data})
             history.push('/')
           }).catch(error=>{
+           
             dispatch({type:"REGISTER_FAIL",payload:error.response.data.message})
             store.addNotification({
               title: "Manewaz!",
@@ -130,7 +131,7 @@ export const valdate_token = (token) => {
     }).catch(error=>{
       store.addNotification({
         title: "Manewaz!",
-        message: error.response,
+        message: error.response.data.message,
         type: "danger",
         insert: "top",
         container: "top-right",

@@ -24,7 +24,7 @@ const initialState = {
                 }
             default:
                 return {
-                    ...state
+                    ...state, isLoading:false
                 }
         }
     }

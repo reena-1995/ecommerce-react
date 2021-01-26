@@ -44,7 +44,7 @@ const login =(state=initialState,action)=>{
             }
     
         default:
-            return {...state};
+            return {...state,isLoading:false};
     }
 }
 export default login

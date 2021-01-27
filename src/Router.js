@@ -66,23 +66,24 @@ const Router1 = () => {
               
               </div>
             </Route>
-            <Route exact path="/horse-list">
+            <Route  path="/horse-list">
             <div className="d-flex outSidebarStyle">
                 <Sidebar/>
                 <Horse/>
               </div>
               
             </Route>
-            <Route exact path="/edit-horse/:slug">
-              <div className="d-flex outSidebarStyle">
+            <Route  path="/edit-horse/:slug">
+               <div className="d-flex outSidebarStyle">
                 <Sidebar/>
                 <EditHorse/>
-              </div>
+                </div>
+                
+              
             </Route>
             <Route  path="/">
             <div className="d-flex outSidebarStyle">
                 <Sidebar/>
-              hello
               </div>
             </Route>
           </Switch>

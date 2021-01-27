@@ -1,8 +1,6 @@
-.sideBarStyle{
-   
-}
+
 .outSidebarStyle{
-    width : 20vw;
+    width : 100vw;
     height: 100vh;
     background-color: rgb(233, 170, 162);
     border: black;

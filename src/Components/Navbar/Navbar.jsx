@@ -3,9 +3,16 @@ import {AppBar,Toolbar,IconButton,Badge,MenuIteam,Typography,Menu,Link} from '@m
 import {ShoppingCart} from '@material-ui/icons';
 import logo from '../../assets/maxresdefault.jpg'
 import useStyles from './Style'
+import {useDispatch,useSelector} from 'react-redux';
+import {logout} from '../../redux/actions/auth'
 
 const Navbar = ({cartCount,loginButton}) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const auth_token      = localStorage.getItem('auth_key');
+    const logoutAction = () =>{
+            dispatch(logout(auth_token))
+    }
     return (
         <>
            <AppBar position="fixed" className={classes.appBar} color="inherit">
@@ -16,7 +23,7 @@ const Navbar = ({cartCount,loginButton}) => {
                    </Typography>
                    <div className={classes.grow} />
                    <div className={classes.button}>
-                        <IconButton aria-label="login" color="inherit" href="/login">
+                        <IconButton aria-label="logout" color="inherit" onClick={logoutAction}>
                           Logout
                         </IconButton>
                     </div>

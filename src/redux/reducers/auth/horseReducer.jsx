@@ -22,6 +22,18 @@ const initialState = {
                     horseDetail:action.payload.data.horseDetails,
                     isLoading:false
                 }
+            case "HORSE_LOADER":
+                    return {
+                        ...state,
+                        isAuthenticated:true,
+                        isLoading:true
+                    }
+            case "HORSE_EDIT_SUCCESS":
+                    return{
+                        ...state,
+                        isAuthenticated:false,
+                        isLoading:false
+                    }
             default:
                 return {
                     ...state, isLoading:false

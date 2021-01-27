@@ -148,4 +148,42 @@ export const valdate_token = (token) => {
   }
 }
 
+export const logout=(token)=>{
+  return dispatch=>{
+    axios.get("https://api-dev.manewayznavigation.com/api/logout-user",{headers:{"Device-Id":"45644564","Device-Type":"android","Is-Debug":"1","Device-Token":"4654564","Environment":"SANDBOX","Device-Name":"Note 6","App-Version":"1","Authorization":"Bearer "+token}}).then(response=>{
+      localStorage.removeItem('auth_key');
+      store.addNotification({
+        title: "Manewaz!",
+        message: response.data.message,
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true
+        }
+      });
+      dispatch({type:"USER_LOGOUT_SUCCESS",payload:response.data});
+      history.push('/login')
+    }).catch(error=>{
+      store.addNotification({
+        title: "Manewaz!",
+        message: error.response.data.message,
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true
+        }
+      });
+      dispatch({type:"USER_LOGOUT_FAIL",payload:error});
+    });
+  }
+}
+
 

@@ -42,7 +42,6 @@ const login =(state=initialState,action)=>{
                 },
                 isLoading:false,
             }
-    
         default:
             return {...state,isLoading:false};
     }

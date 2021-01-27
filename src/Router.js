@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import {BrowserRouter as Router,Switch,Route, Redirect} from 'react-router-dom'
-import {Products,Navbar,Cart,Login,Loader,Register,Sidebar,Horse} from './Components';
+import {Products,Navbar,Cart,Login,Loader,Register,Sidebar,Horse,EditHorse} from './Components';
 import { commerce } from './lib/commerce';
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
@@ -73,12 +73,11 @@ const Router1 = () => {
               </div>
               
             </Route>
-            <Route exact path="/add-horse/:slug">
-            <div className="d-flex outSidebarStyle">
+            <Route exact path="/edit-horse/:slug">
+              <div className="d-flex outSidebarStyle">
                 <Sidebar/>
-                <Horse/>
+                <EditHorse/>
               </div>
-              
             </Route>
             <Route  path="/">
             <div className="d-flex outSidebarStyle">
